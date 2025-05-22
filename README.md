@@ -1,45 +1,51 @@
 Outlook Email Analysis Dashboard
 
-This project provides a Streamlit web application for interactive analysis and visualization of email data, designed to help users understand their communication patterns, identify key topics, and perform sentiment analysis on their exported Outlook emails.
+This project provides a Streamlit-based web application designed for comprehensive analysis and visualization of personal Outlook email data. It enables users to gain insights into their communication patterns, identify key topics, and perform sentiment analysis.
 Features
 
-    Interactive Dashboard: A user-friendly web interface built with Streamlit.
+    Interactive Dashboard: A user-friendly and responsive web interface powered by Streamlit.
 
-    Flexible Data Loading: Supports uploading CSV/TSV files or loading from a default local file.
+    Flexible Data Ingestion: Supports uploading CSV/TSV files or automatically loading from a designated local file.
 
-    Date Filtering: Filter emails by a specific date range.
+    Dynamic Filtering:
 
-    Sender Filtering: Select specific senders to analyze their communications.
+        Date Range: Analyze emails within specified timeframes.
 
-    Keyword Search: Search for keywords within email subjects and bodies.
+        Sender: Focus on communications from particular individuals.
 
-    Email Volume Analysis: Visualize email frequency over time (daily, monthly).
+        Keyword Search: Locate emails containing specific terms in subjects or bodies.
 
-    Activity Heatmap: See email activity by hour and day of the week.
+    Communication Metrics:
 
-    Top Senders: Identify the most active email senders.
+        Email Volume Trends: Visualizations of email frequency over daily and monthly periods.
 
-    Outlier Detection: Flag days with unusually high email volumes.
+        Activity Heatmap: A heatmap illustrating email activity by hour and day of the week.
 
-    Common Keywords: Analyze frequently used words and bigrams in subject lines.
+        Top Senders: Identification and ranking of the most prolific email senders.
 
-    Word Cloud: Generate a visual representation of common words in email bodies.
+        Outlier Detection: Automated flagging of days with unusually high email volumes.
 
-    Named Entity Recognition (NER): Extract entities (like people, organizations, locations) from email content.
+    Content Analysis:
 
-    Sentiment Analysis: Determine the emotional tone of emails and identify highly positive/negative communications.
+        Common Keywords: Extraction and visualization of frequently occurring words and bigrams in subject lines.
 
-    Dynamic Insights: Provides a summary of key findings and behavioral patterns based on the filtered data.
+        Word Cloud: A visual representation of prominent terms within email bodies.
 
-How to Run
+        Named Entity Recognition (NER): Identification of entities (e.g., persons, organizations, locations) within email content.
 
-Follow these steps to set up and run the Email Analysis Dashboard.
+    Sentiment Analysis: Assessment of the emotional tone of emails, highlighting highly positive or negative communications.
+
+    Behavioral Insights: Dynamic summaries providing interpretive insights into communication patterns and potential anomalies.
+
+Getting Started
+
+Follow these instructions to set up and run the Email Analysis Dashboard.
 0. Export Your Emails to CSV
 
-To get your email data in a format suitable for this dashboard, you'll need to export it from Outlook into a CSV file. One way to do this is using a VBA script.
+To prepare your email data for analysis, you will need to export it from Outlook into a CSV file. A VBA script can facilitate this process.
 Using the Provided VBA Script
 
-This VBA script can be used directly within Outlook to export emails from a specified shared mailbox folder to a CSV file.
+The following VBA script can be executed directly within Outlook to export emails from a specified shared mailbox folder to a CSV file.
 
 Sub ExportSharedInboxEmailsToCSV()
     ' === CONFIGURATION VARIABLES ===
@@ -139,75 +145,74 @@ End Sub
 
 How to Manually Add and Run the VBA Script in Outlook:
 
-    Enable Developer Tab (if not already visible):
+    Enable Developer Tab:
 
-        In Outlook, go to File > Options > Customize Ribbon.
+        In Outlook, navigate to File > Options > Customize Ribbon.
 
-        Under "Main Tabs" on the right, check the box next to Developer.
+        Under "Main Tabs" on the right, select the Developer checkbox.
 
-        Click OK. The Developer tab will now appear in your Outlook ribbon.
+        Click OK. The Developer tab will now be visible in your Outlook ribbon.
 
     Open VBA Editor:
 
-        In Outlook, click on the Developer tab.
+        From the Outlook ribbon, click the Developer tab.
 
         Click Visual Basic (or press Alt + F11).
 
     Insert a New Module:
 
-        In the VBA editor, in the left-hand "Project Explorer" pane, expand "Microsoft Outlook Objects" or "VBAProject (VBAProject.OTM)".
+        In the VBA editor's "Project Explorer" pane (left side), expand "Microsoft Outlook Objects" or "VBAProject (VBAProject.OTM)".
 
-        Right-click on "Modules" (if it exists, otherwise right-click on "VBAProject (VBAProject.OTM)" and choose Insert > Module).
-
-        Select Insert > Module.
+        Right-click on "Modules" (or "VBAProject (VBAProject.OTM)" if "Modules" is not present) and select Insert > Module.
 
     Paste the Code:
 
-        A new, blank module window will appear. Copy the entire VBA code provided above (Sub ExportSharedInboxEmailsToCSV() ... End Sub) and paste it into this module.
+        Copy the entire VBA code provided above (Sub ExportSharedInboxEmailsToCSV() ... End Sub) and paste it into the newly opened module window.
 
     Configure Variables:
 
-        IMPORTANT: In the VBA code you just pasted, locate the === CONFIGURATION VARIABLES === section.
+        Crucially, locate the === CONFIGURATION VARIABLES === section within the VBA code.
 
-        Change "Your Shared Mailbox Name" to the exact name of your shared mailbox as it appears in Outlook (e.g., "Sales Team Inbox").
+        Update sharedMailboxName with the exact name of your shared mailbox (e.g., "Sales Team Inbox").
 
-        Change "C:\Users\YourName\Documents\EmailExports\" to the full path where you want the shared-inbox.csv file to be saved (e.g., "C:\Users\MHolmes\Documents\outlook-data\"). Ensure the path ends with a backslash \. The script will attempt to create the folder if it doesn't exist.
+        Update outputFolder with the full desired path for the CSV file (e.g., "C:\Users\YourName\Documents\EmailExports\"). Ensure the path ends with a backslash \. The script will attempt to create the folder if it doesn't exist.
 
     Run the Macro:
 
-        In the VBA editor, place your cursor anywhere within the Sub ExportSharedInboxEmailsToCSV() code.
+        Place your cursor anywhere within the Sub ExportSharedInboxEmailsToCSV() code in the VBA editor.
 
-        Press F5 to run the macro, or go to Run > Run Sub/UserForm.
+        Press F5 to execute the macro, or go to Run > Run Sub/UserForm.
 
-        A message box will confirm when the export is complete and show the file path.
+        A message box will confirm successful export and display the file's location.
 
 Automating with a .bat file (Optional)
 
-You can create a .bat file to run the VBA macro without manually opening the VBA editor.
-Create a file named SharedMailboxExportCSV.bat (or any other name) with content similar to this:
+For automated execution, create a .bat file (e.g., SharedMailboxExportCSV.bat) with content similar to this:
 
 "C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" /m "ExportSharedInboxEmailsToCSV"
 
-    Adjust the Outlook Path: The path to OUTLOOK.EXE might vary depending on your Office installation (e.g., Office15 for Office 2013, Office14 for Office 2010, or Program Files (x86) for 32-bit Office on a 64-bit system).
+    Outlook Path: Adjust the path to OUTLOOK.EXE if your Office installation differs (e.g., Office15 for Office 2013, Program Files (x86) for 32-bit Office).
 
-    Macro Name: Ensure "ExportSharedInboxEmailsToCSV" exactly matches the name of your VBA subroutine.
+    Macro Name: Ensure the macro name ("ExportSharedInboxEmailsToCSV") precisely matches your VBA subroutine.
 
-Running this .bat file will open Outlook (if not already open) and execute the specified macro.
+Executing this .bat file will launch Outlook (if not already open) and run the specified VBA macro.
 1. Save Your Email Data (Dashboard Input)
 
-Ensure your exported email data is saved in a plain text file named shared-inbox.csv (or .tsv) in the same directory as your Python scripts. This is the default file the dashboard will look for if you don't upload one. The file should have the following header and be tab-separated (or comma-separated if you change the sep parameter in the pd.read_csv call in your dashboard script):
+Place your exported email data file (e.g., shared-inbox.csv or a .tsv file) in the same directory as your Python scripts. This file will serve as the default input for the dashboard if no file is uploaded via the Streamlit interface.
+
+The file should contain a header row and be delimited (e.g., tab or comma-separated) with the following mandatory columns: Subject, Sender, Date, and Body.
+
+Example format:
 
 Subject	Sender	Date	Body
 Meeting Reminder	john.doe@example.com	01/01/2024 10:30:00 AM	Hi Team, just a reminder about our meeting tomorrow...
 Project Update	jane.smith@example.com	01/01/2024 02:15:30 PM	The project is progressing well. See attached for details...
 ...
 
-
-
-The dashboard is configured to use sep=None and engine='python' for automatic delimiter detection, but a tab-separated file is recommended for consistency with common email export formats.
+The dashboard is configured to automatically detect the delimiter (sep=None, engine='python'), but a tab-separated file is recommended for consistency with common email export formats.
 2. Install Dependencies
 
-It's highly recommended to use a Python virtual environment to manage project dependencies.
+It is highly recommended to use a Python virtual environment to manage project dependencies, ensuring a clean and isolated environment.
 
 # Navigate to your project directory
 cd /path/to/your/outlook-email-analysis-project
@@ -222,75 +227,71 @@ python -m venv venv
 source venv/bin/activate
 
 # --- IMPORTANT FOR WINDOWS USERS ---
-# If you encounter errors related to "Microsoft Visual C++ 14.0 or greater is required"
-# or "Could not find vswhere.exe" during package installation, you need to install
-# Microsoft Visual C++ Build Tools.
+# If installation errors occur related to "Microsoft Visual C++ 14.0 or greater is required"
+# or "Could not find vswhere.exe", you must install Microsoft Visual C++ Build Tools.
 #
-# 1. Download the "Build Tools for Visual Studio" from Microsoft's website:
-#    https://visualstudio.microsoft.com/downloads/ (Look under "Tools for Visual Studio" -> "Other Tools and Frameworks")
+# 1. Download "Build Tools for Visual Studio" from Microsoft's website:
+#    [https://visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/) (Look under "Tools for Visual Studio" -> "Other Tools and Frameworks")
 # 2. Run the installer.
-# 3. In the installer, select the "Desktop development with C++" workload.
+# 3. Select the "Desktop development with C++" workload.
 # 4. Ensure "MSVC v143 - VS 2022 C++ x64/x86 build tools" (or the latest equivalent, e.g., v142 for VS 2019)
-#    and "Windows 10 SDK" (or the latest Windows SDK) are selected under "Individual components" if not included by default.
-# 5. Install the selected components.
+#    and "Windows 10 SDK" (or the latest Windows SDK) are selected under "Individual components".
+# 5. Complete the installation.
 # -----------------------------------
 
-# Run the provided installation script to install all necessary Python packages
+# Execute the provided installation script to install all necessary Python packages
 python install_dependencies.py
-
 
 The install_dependencies.py script will:
 
-    Install numpy, streamlit, pandas, matplotlib, seaborn, wordcloud, textblob, stanza, plotly, scikit-learn, tqdm, and nltk.
+    Install core Python libraries: numpy, streamlit, pandas, matplotlib, seaborn, wordcloud, textblob, stanza, plotly, scikit-learn, tqdm, and nltk.
 
-    Download necessary NLTK and TextBlob corpora.
+    Download essential NLTK and TextBlob linguistic corpora.
 
-    Download the English model for Stanza.
+    Download the English language model for Stanza.
 
 3. Run the Dashboard
 
-Once all dependencies are successfully installed, you can launch the Streamlit application:
+Once all dependencies are successfully installed and your virtual environment is active, launch the Streamlit application:
 
-# Ensure your virtual environment is still active
 streamlit run outlook-email-analysis-dashboard.py
 
-
-This command will open the Streamlit application in your default web browser.
+This command will open the Streamlit application in your default web browser, typically at http://localhost:8501.
 Dashboard Overview
 
-Upon running the application, you will see an interactive dashboard.
+The interactive dashboard provides various sections for email analysis:
 
-    Sidebar Filters: Use the filters on the left sidebar to narrow down the email data by date range, sender, or keywords.
+    Sidebar Filters: Utilize the left sidebar to apply filters based on date range, sender, or keywords, dynamically updating the displayed data.
 
-    Overview Metrics: See quick statistics like total emails and unique senders.
+    Overview Metrics: Quick summary statistics, including total emails and unique senders.
 
-    Interactive Charts: Explore various plots for email frequency, sender distribution, keyword analysis, and sentiment.
+    Interactive Charts: Dynamic plots visualizing email frequency, sender distribution, keyword analysis, and sentiment.
 
-    Expandable Sections: Click on the expanders (+) to reveal detailed charts and data tables for each analysis section.
+    Expandable Sections: Click on section headers to expand and view detailed charts, data tables, and specific insights.
 
-    Dynamic Summary: A dedicated section at the bottom provides a narrative summary of key findings and potential behavioral insights based on the applied filters.
+    Dynamic Summary: A dedicated section offering a narrative summary of key findings and potential behavioral patterns derived from the filtered email data.
 
 Dependencies
 
-The project relies on the following Python libraries:
+This project relies on the following Python libraries:
 
-    streamlit: For building the interactive web application.
+    streamlit: For building interactive web applications.
 
-    pandas: For data manipulation and analysis.
+    pandas: Essential for data manipulation and analysis.
 
-    matplotlib, seaborn, plotly: For data visualization.
+    matplotlib, seaborn, plotly: Comprehensive libraries for data visualization.
 
-    wordcloud: For generating word clouds.
+    wordcloud: Generates visual word clouds from text data.
 
-    textblob: For performing sentiment analysis.
+    textblob: Provides a simple API for common natural language processing (NLP) tasks, including sentiment analysis.
 
-    stanza: For advanced natural language processing, specifically Named Entity Recognition.
+    stanza: An advanced NLP library for tasks like Named Entity Recognition.
 
-    scikit-learn: Used for text vectorization (e.g., CountVectorizer for bigrams).
+    scikit-learn: Utilized for text vectorization (e.g., CountVectorizer for bigram analysis).
 
-    tqdm: For progress bars (though not explicitly used in the dashboard script, it's a common data science utility).
+    tqdm: A fast, extensible progress bar for loops (included in install_dependencies.py).
 
-    nltk: For general natural language processing tasks (like stopwords).
+    nltk: A foundational library for natural language processing, used for stopwords and tokenization.
 
 Author
 
@@ -298,12 +299,12 @@ Matthew Holmes
 Phone: 0412262967
 Notes
 
-    The dashboard script expects the input file to have columns named Subject, Sender, Date, and Body.
+    The dashboard script expects the input CSV/TSV file to contain the columns: Subject, Sender, Date, and Body.
 
-    The Date column is expected in the format DD/MM/YYYY HH:MM:SS AM/PM.
+    The Date column is specifically parsed expecting the format DD/MM/YYYY HH:MM:SS AM/PM.
 
-    Email bodies are pre-processed to remove common footers and polite endings before analysis.
+    Email bodies undergo basic preprocessing to remove common signatures and polite closings.
 
-    Sentiment analysis is performed using TextBlob, which provides a polarity score between -1 (negative) and 1 (positive).
+    Sentiment analysis generates a polarity score (ranging from -1 for negative to 1 for positive).
 
-    Named Entity Recognition uses the Stanza library, which requires downloading its English model (handled by install_dependencies.py).
+    Named Entity Recognition requires the download of an English language model for Stanza, which is handled by the install_dependencies.py script.
